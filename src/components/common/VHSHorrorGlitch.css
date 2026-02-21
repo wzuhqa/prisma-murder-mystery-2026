@@ -1,0 +1,349 @@
+/* VHS Horror Glitch Effect */
+.vhs-container {
+    position: relative;
+    display: inline-block;
+    color: #fff;
+    background-color: #0b0b0b;
+    padding: 10px 20px;
+    overflow: visible;
+    font-family: 'Special Elite', 'Courier New', monospace;
+    /* Eerie, typewriter-like sharp font */
+}
+
+.vhs-text {
+    position: relative;
+    z-index: 2;
+    letter-spacing: 0.15em;
+    animation: vhs-flicker 2s infinite;
+}
+
+/* Base flickering for "normal" state */
+@keyframes vhs-flicker {
+
+    0%,
+    100% {
+        opacity: 1;
+        filter: brightness(1);
+    }
+
+    5% {
+        opacity: 0.9;
+        filter: brightness(1.1);
+    }
+
+    10% {
+        opacity: 1;
+        filter: brightness(1);
+    }
+
+    15% {
+        opacity: 0.95;
+        filter: brightness(0.9);
+    }
+
+    20% {
+        opacity: 1;
+        filter: brightness(1);
+    }
+}
+
+/* RGB Separation Layers */
+.vhs-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 1;
+}
+
+.vhs-glitch-active .vhs-layer-red {
+    opacity: 0.7;
+    color: #ff0000;
+    animation: vhs-rgb-red 0.5s step-end infinite;
+}
+
+.vhs-glitch-active .vhs-layer-cyan {
+    opacity: 0.7;
+    color: #00ffff;
+    animation: vhs-rgb-cyan 0.5s step-end infinite;
+}
+
+@keyframes vhs-rgb-red {
+    0% {
+        transform: translate(3px, 1px);
+    }
+
+    20% {
+        transform: translate(-2px, -1px);
+    }
+
+    40% {
+        transform: translate(4px, 2px);
+    }
+
+    60% {
+        transform: translate(-3px, 1px);
+    }
+
+    80% {
+        transform: translate(2px, -2px);
+    }
+
+    100% {
+        transform: translate(3px, 1px);
+    }
+}
+
+@keyframes vhs-rgb-cyan {
+    0% {
+        transform: translate(-3px, -1px);
+    }
+
+    20% {
+        transform: translate(2px, 1px);
+    }
+
+    40% {
+        transform: translate(-4px, -2px);
+    }
+
+    60% {
+        transform: translate(3px, -1px);
+    }
+
+    80% {
+        transform: translate(-2px, 2px);
+    }
+
+    100% {
+        transform: translate(-3px, -1px);
+    }
+}
+
+/* Horizontal Slice Distortion */
+.vhs-glitch-active .vhs-text {
+    animation: vhs-slice 0.4s step-end infinite, vhs-jitter 0.1s linear infinite;
+}
+
+@keyframes vhs-slice {
+    0% {
+        clip-path: inset(10% 0 85% 0);
+        transform: translateX(-5px);
+    }
+
+    10% {
+        clip-path: inset(20% 0 75% 0);
+        transform: translateX(5px);
+    }
+
+    20% {
+        clip-path: inset(50% 0 45% 0);
+        transform: translateX(-8px);
+    }
+
+    30% {
+        clip-path: inset(5% 0 90% 0);
+        transform: translateX(3px);
+    }
+
+    40% {
+        clip-path: inset(80% 0 10% 0);
+        transform: translateX(-10px);
+    }
+
+    50% {
+        clip-path: inset(15% 0 70% 0);
+        transform: translateX(8px);
+    }
+
+    60% {
+        clip-path: inset(40% 0 50% 0);
+        transform: translateX(-4px);
+    }
+
+    70% {
+        clip-path: inset(0% 0 95% 0);
+        transform: translateX(10px);
+    }
+
+    80% {
+        clip-path: inset(60% 0 20% 0);
+        transform: translateX(-6px);
+    }
+
+    90% {
+        clip-path: inset(30% 0 60% 0);
+        transform: translateX(4px);
+    }
+
+    100% {
+        clip-path: inset(10% 0 85% 0);
+        transform: translateX(-5px);
+    }
+}
+
+@keyframes vhs-jitter {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(1px, -1px);
+    }
+
+    50% {
+        transform: translate(-1px, 1px);
+    }
+
+    75% {
+        transform: translate(1px, 1px);
+    }
+
+    100% {
+        transform: translate(-1px, -1px);
+    }
+}
+
+/* VHS Scanlines */
+.vhs-scanlines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(0deg,
+            rgba(0, 0, 0, 0.1),
+            rgba(0, 0, 0, 0.1) 1px,
+            transparent 1px,
+            transparent 2px);
+    pointer-events: none;
+    z-index: 5;
+    animation: vhs-scanlines-move 10s linear infinite;
+}
+
+@keyframes vhs-scanlines-move {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 0 100%;
+    }
+}
+
+/* Noise Flash Overlay */
+.vhs-noise {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0;
+    pointer-events: none;
+    z-index: 10;
+    mix-blend-mode: screen;
+}
+
+.vhs-glitch-active .vhs-noise {
+    animation: vhs-noise-flash 0.5s step-end infinite;
+}
+
+@keyframes vhs-noise-flash {
+
+    0%,
+    100% {
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.15;
+    }
+
+    30% {
+        opacity: 0.05;
+    }
+
+    50% {
+        opacity: 0.2;
+        transform: scale(1.1) translate(2px, -2px);
+    }
+
+    70% {
+        opacity: 0.1;
+    }
+
+    90% {
+        opacity: 0.15;
+        transform: scale(0.9) translate(-1px, 1px);
+    }
+}
+
+/* MEGA GLITCH - 10% chance */
+.vhs-mega-glitch .vhs-text {
+    animation: vhs-mega-slice 0.3s step-end infinite, vhs-mega-jitter 0.05s linear infinite;
+    filter: blur(1px);
+}
+
+.vhs-mega-glitch .vhs-red-flash {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 0, 0, 0.2);
+    z-index: 4;
+    pointer-events: none;
+    animation: vhs-mega-flash 0.2s infinite;
+}
+
+@keyframes vhs-mega-slice {
+    0% {
+        clip-path: inset(0 0 0 0);
+        transform: translateX(-15px) skew(10deg);
+    }
+
+    25% {
+        clip-path: inset(30% 0 10% 0);
+        transform: translateX(20px) skew(-10deg);
+    }
+
+    50% {
+        clip-path: inset(10% 0 70% 0);
+        transform: translateX(-25px) skew(15deg);
+    }
+
+    75% {
+        clip-path: inset(60% 0 5% 0);
+        transform: translateX(15px) skew(-5deg);
+    }
+}
+
+@keyframes vhs-mega-jitter {
+    0% {
+        transform: translate(-5px, 3px);
+    }
+
+    50% {
+        transform: translate(5px, -3px);
+    }
+
+    100% {
+        transform: translate(-3px, 5px);
+    }
+}
+
+@keyframes vhs-mega-flash {
+
+    0%,
+    100% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}

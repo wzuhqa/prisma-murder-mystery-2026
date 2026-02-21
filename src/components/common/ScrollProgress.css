@@ -1,0 +1,83 @@
+/* ============================================
+   SCROLL PROGRESS INDICATOR
+   Forensic-style investigation progress bar
+   ============================================ */
+
+.scroll-progress-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 6px;
+    height: 100vh;
+    z-index: 9991;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.scroll-progress-track {
+    width: 2px;
+    height: 100%;
+    background: rgba(139, 0, 0, 0.1);
+    position: relative;
+    overflow: visible;
+}
+
+.scroll-progress-bar {
+    width: 100%;
+    background: linear-gradient(to bottom, #4a0000, #8b0000, #ff1744);
+    box-shadow: 0 0 10px rgba(139, 0, 0, 0.8);
+    transition: height 0.1s ease-out;
+    position: relative;
+}
+
+.scroll-progress-glow {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 12px;
+    background: #ff1744;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    box-shadow: 0 5px 15px rgba(255, 23, 68, 0.9);
+    transition: top 0.1s ease-out;
+    animation: blood-drip-pulse 1s infinite alternate;
+}
+
+@keyframes blood-drip-pulse {
+    0% {
+        transform: translateX(-50%) scale(1);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateX(-50%) scale(1.2);
+        opacity: 1;
+    }
+}
+
+.scroll-progress-label {
+    display: none;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .scroll-progress-container {
+        width: 4px;
+    }
+
+    .scroll-progress-glow {
+        width: 6px;
+        height: 10px;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+
+    .scroll-progress-bar,
+    .scroll-progress-glow {
+        transition: none;
+        animation: none;
+    }
+}

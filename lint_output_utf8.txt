@@ -1,0 +1,168 @@
+﻿
+> prisma-murder-mystery@0.0.0 lint
+> eslint .
+
+
+C:\Users\Akul\Documents\Prisma Website\prisma-murder-mystery\src\components\common\ForensicInvestigationUI.jsx
+   5:14  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  16:14  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\Akul\Documents\Prisma Website\prisma-murder-mystery\src\components\common\ForensicScanner.jsx
+  159:3   error  'spotlightRadius' is assigned a value but never used. Allowed unused args must match /^_/u                                      no-unused-vars
+  162:10  error  'position' is assigned a value but never used. Allowed unused vars must match /^(motion|React|_|[A-Z_])/u                       no-unused-vars
+  241:14  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  341:30  error  'mousePosition' is assigned a value but never used. Allowed unused vars must match /^(motion|React|_|[A-Z_])/u                  no-unused-vars
+
+C:\Users\Akul\Documents\Prisma Website\prisma-murder-mystery\src\components\common\GlitchText.jsx
+  52:6  warning  React Hook useEffect has a missing dependency: 'generateRandomChars'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\Akul\Documents\Prisma Website\prisma-murder-mystery\src\components\common\SlashNavbar.jsx
+   77:87  error  'setClickCoords' is defined but never used. Allowed unused args must match /^_/u                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          no-unused-vars
+   86:10  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+  84 |     x: 0,
+  85 |     y: 0,
+> 86 |     vx: (Math.random() - 0.5) * 1.5,
+     |          ^^^^^^^^^^^^^ Cannot call impure function
+  87 |     vy: -Math.random() * 0.8 - 0.4,
+  88 |     life: 0,
+  89 |     maxLife: 0.6 + Math.random() * 0.6,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   react-hooks/purity
+   87:10  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+  85 |     y: 0,
+  86 |     vx: (Math.random() - 0.5) * 1.5,
+> 87 |     vy: -Math.random() * 0.8 - 0.4,
+     |          ^^^^^^^^^^^^^ Cannot call impure function
+  88 |     life: 0,
+  89 |     maxLife: 0.6 + Math.random() * 0.6,
+  90 |     size: 2 + Math.random() * 2,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            react-hooks/purity
+   89:20  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+  87 |     vy: -Math.random() * 0.8 - 0.4,
+  88 |     life: 0,
+> 89 |     maxLife: 0.6 + Math.random() * 0.6,
+     |                    ^^^^^^^^^^^^^ Cannot call impure function
+  90 |     size: 2 + Math.random() * 2,
+  91 |     color: '#ff4d00',
+  92 |     opacity: 0,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           react-hooks/purity
+   90:15  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+  88 |     life: 0,
+  89 |     maxLife: 0.6 + Math.random() * 0.6,
+> 90 |     size: 2 + Math.random() * 2,
+     |               ^^^^^^^^^^^^^ Cannot call impure function
+  91 |     color: '#ff4d00',
+  92 |     opacity: 0,
+  93 |     type: 'subtle'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 react-hooks/purity
+  179:52  error  Error: Cannot access variable before it is declared
+
+`animate` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+  177 |
+  178 |     if (isStillActive || hasActiveParticles || isGlitching) {
+> 179 |       animationRef.current = requestAnimationFrame(animate)
+      |                                                    ^^^^^^^ `animate` accessed before it is declared
+  180 |     }
+  181 |   }, [])
+  182 |
+
+   99 |
+  100 |   // Advanced Horror Animation loop
+> 101 |   const animate = useCallback(() => {
+      |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 102 |     const isStillActive = isActiveRef.current
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 103 |     const isGlitching = isGlitchingRef.current
+      ΓÇª
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 180 |     }
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 181 |   }, [])
+      | ^^^^^^^^^ `animate` is declared here
+  182 |
+  183 |   const handleMouseEnter = () => {
+  184 |     isActiveRef.current = true  react-hooks/immutability
+
+C:\Users\Akul\Documents\Prisma Website\prisma-murder-mystery\src\components\common\VisceralBloodSystem.jsx
+  353:6  warning  React Hook useEffect has a missing dependency: 'intensitySettings'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\Akul\Documents\Prisma Website\prisma-murder-mystery\src\components\home\ForensicDatabaseLoader.jsx
+   58:27  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+  56 |           }}
+  57 |           transition={{ 
+> 58 |             duration: 2 + Math.random() * 2, 
+     |                           ^^^^^^^^^^^^^ Cannot call impure function
+  59 |             repeat: Infinity,
+  60 |             delay: Math.random() * 2
+  61 |           }}          react-hooks/purity
+   60:20  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+  58 |             duration: 2 + Math.random() * 2, 
+  59 |             repeat: Infinity,
+> 60 |             delay: Math.random() * 2
+     |                    ^^^^^^^^^^^^^ Cannot call impure function
+  61 |           }}
+  62 |         />
+  63 |       ))}                                  react-hooks/purity
+   75:29  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+  73 |           }}
+  74 |           transition={{ 
+> 75 |             duration: 2.5 + Math.random() * 2, 
+     |                             ^^^^^^^^^^^^^ Cannot call impure function
+  76 |             repeat: Infinity,
+  77 |             delay: Math.random() * 2
+  78 |           }}      react-hooks/purity
+   77:20  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+  75 |             duration: 2.5 + Math.random() * 2, 
+  76 |             repeat: Infinity,
+> 77 |             delay: Math.random() * 2
+     |                    ^^^^^^^^^^^^^ Cannot call impure function
+  78 |           }}
+  79 |         />
+  80 |       ))}                                react-hooks/purity
+  168:34  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+  166 |       let line = ''
+  167 |       for (let j = 0; j < 80; j++) {
+> 168 |         line += chars[Math.floor(Math.random() * chars.length)]
+      |                                  ^^^^^^^^^^^^^ Cannot call impure function
+  169 |       }
+  170 |       lines.push(line)
+  171 |     }  react-hooks/purity
+
+C:\Users\Akul\Documents\Prisma Website\prisma-murder-mystery\src\components\home\TechFestLoader.jsx
+  357:6  warning  React Hook useEffect has a missing dependency: 'messages'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  379:6  warning  React Hook useEffect has a missing dependency: 'panels'. Either include it or remove the dependency array    react-hooks/exhaustive-deps
+
+C:\Users\Akul\Documents\Prisma Website\prisma-murder-mystery\src\hooks\useTransitionAnimations.js
+  22:9  warning  The 'easingCurves' object makes the dependencies of useCallback Hook (at line 149) change on every render. To fix this, wrap the initialization of 'easingCurves' in its own useMemo() Hook  react-hooks/exhaustive-deps
+  22:9  warning  The 'easingCurves' object makes the dependencies of useCallback Hook (at line 248) change on every render. To fix this, wrap the initialization of 'easingCurves' in its own useMemo() Hook  react-hooks/exhaustive-deps
+
+C:\Users\Akul\Documents\Prisma Website\prisma-murder-mystery\src\pages\Team.jsx
+   37:7   error    'useTypewriter' is assigned a value but never used. Allowed unused vars must match /^(motion|React|_|[A-Z_])/u  no-unused-vars
+  367:6   warning  React Hook useEffect has a missing dependency: 'lines'. Either include it or remove the dependency array        react-hooks/exhaustive-deps
+  618:71  error    'i' is defined but never used. Allowed unused args must match /^_/u                                             no-unused-vars
+
+Γ£û 26 problems (19 errors, 7 warnings)
+

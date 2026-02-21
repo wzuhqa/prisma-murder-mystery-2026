@@ -1,0 +1,207 @@
+.breadcrumb-trail-container {
+    position: fixed;
+    top: 100px;
+    left: 20px;
+    z-index: 10;
+    /* Keep it above the bloody background but behind the relative sections */
+    pointer-events: none;
+    width: calc(100% - 40px);
+    max-width: 600px;
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+@media (max-width: 768px) {
+    .breadcrumb-trail-container {
+        top: 80px;
+        left: 10px;
+        width: calc(100% - 20px);
+        max-width: 100%;
+        transform: scale(0.85);
+        /* Slightly smaller on mobile */
+        transform-origin: top left;
+    }
+}
+
+/* SVG Canvas styling for the connecting strings */
+.red-string-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: visible;
+    z-index: 1;
+    /* Below nodes */
+}
+
+.red-string {
+    stroke: #ff1a1a;
+    stroke-linecap: round;
+    fill: none;
+}
+
+.red-string-fray {
+    stroke: rgba(200, 0, 0, 0.5);
+    stroke-dasharray: 2, 6, 4, 8;
+    /* Very frayed irregular texture */
+    fill: none;
+    stroke-linecap: round;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.red-string-shadow {
+    stroke: rgba(0, 0, 0, 0.4);
+    stroke-width: 4;
+    filter: blur(4px);
+    fill: none;
+    transform: translateY(15px);
+    /* Push shadow down to board */
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Flex wrapper for the nodes */
+.breadcrumb-nodes-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 40px;
+    /* Base horizontal distance between pins */
+    width: 100%;
+    padding: 20px 10px;
+    flex-wrap: wrap;
+    /* Allow wrapping if history gets long on small screens */
+    opacity: 0.6;
+    /* Push it further into the background visually */
+}
+
+/* Individual Node / "Scrap of Paper" */
+.breadcrumb-node {
+    position: relative;
+    pointer-events: auto;
+    /* Re-enable clicks for nodes */
+    cursor: pointer;
+    z-index: 2;
+    /* Above the strings */
+    transform: rotate(var(--rand-rot)) translateY(var(--rand-y));
+    transition: filter 0.3s ease, transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@keyframes pin-wiggle {
+    0% {
+        transform: scale(1.05) rotate(calc(var(--rand-rot) * -1)) translateY(var(--rand-y)) rotateZ(0deg);
+    }
+
+    25% {
+        transform: scale(1.05) rotate(calc(var(--rand-rot) * -1)) translateY(var(--rand-y)) rotateZ(-5deg);
+    }
+
+    50% {
+        transform: scale(1.05) rotate(calc(var(--rand-rot) * -1)) translateY(var(--rand-y)) rotateZ(5deg);
+    }
+
+    75% {
+        transform: scale(1.05) rotate(calc(var(--rand-rot) * -1)) translateY(var(--rand-y)) rotateZ(-3deg);
+    }
+
+    100% {
+        transform: scale(1.05) rotate(calc(var(--rand-rot) * -1)) translateY(var(--rand-y)) rotateZ(0deg);
+    }
+}
+
+.breadcrumb-node:not(.is-current):hover {
+    filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.4));
+    animation: pin-wiggle 0.4s ease-in-out;
+    transform: scale(1.05) rotate(calc(var(--rand-rot) * -1)) translateY(var(--rand-y));
+}
+
+/* 
+  Different appearance for the current page vs history.
+  Current node is solid, history nodes are slightly faded/transparent.
+*/
+.breadcrumb-node:not(.is-current) {
+    opacity: 0.7;
+}
+
+/* The visual "Push Pin" */
+.board-pin {
+    width: 12px;
+    height: 12px;
+    background: radial-gradient(circle at 30% 30%, #ff4d4d, #990000 60%, #330000);
+    border-radius: 50%;
+    box-shadow:
+        inset -1px -1px 3px rgba(0, 0, 0, 0.8),
+        2px 5px 4px rgba(0, 0, 0, 0.6);
+    position: relative;
+    z-index: 3;
+    margin-bottom: 5px;
+}
+
+/* Add a silver pin needle shadow pointing down */
+.board-pin::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 5px;
+    width: 2px;
+    height: 12px;
+    background: linear-gradient(to right, #666, #aaa, #333);
+    transform: rotate(-15deg);
+    z-index: -1;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    opacity: 0.6;
+}
+
+/* The text label */
+.node-label {
+    background-color: #f4eee1;
+    /* Old paper color */
+    padding: 4px 8px;
+    border: 1px solid #d4c8b0;
+    box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.5);
+    position: relative;
+    /* Grunge edges using clip-path (subtle) */
+    clip-path: polygon(0% 2%, 100% 0%, 98% 100%, 2% 98%);
+}
+
+.is-current .node-label {
+    background-color: #2a0808;
+    border-color: #ff1a1a;
+}
+
+.node-text {
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    color: #111;
+    /* Rough marker font effect */
+    text-transform: uppercase;
+}
+
+.is-current .node-text {
+    color: #ff3333;
+    text-shadow: 0 0 5px rgba(255, 51, 51, 0.5);
+}
+
+/* Masking tape strip on top of label */
+.node-label::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-3deg);
+    width: 30px;
+    height: 10px;
+    background-color: rgba(220, 220, 200, 0.6);
+    border: 1px dashed rgba(180, 180, 150, 0.8);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    pointer-events: none;
+}

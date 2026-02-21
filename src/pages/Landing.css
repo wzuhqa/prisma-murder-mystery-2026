@@ -1,0 +1,669 @@
+/* =====================================================
+   LANDING PAGE — AAA NOIR REDESIGN
+   Clean hierarchy. Glass panel. Premium atmosphere.
+   ===================================================== */
+
+/* ── Design tokens ─────────────────────────────────── */
+.lp {
+    /* Palette */
+    --lp-bg: #050507;
+    --lp-blood: #8b0000;
+    --lp-blood-bright: #c41e3a;
+    --lp-ivory: #e8e0d0;
+    --lp-muted: rgba(232, 224, 208, 0.45);
+    --lp-ghost: rgba(232, 224, 208, 0.12);
+
+    /* Typography */
+    --lp-serif: 'Playfair Display', Georgia, serif;
+    --lp-mono: 'Courier Prime', 'Courier New', monospace;
+
+    /* Motion */
+    --lp-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── Root shell ────────────────────────────────────── */
+.lp {
+    position: relative;
+    min-height: 100vh;
+    background: var(--lp-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    color: var(--lp-ivory);
+}
+
+/* =====================================================
+   BACKGROUND LAYERS — subtle, not chaotic
+   ===================================================== */
+
+/* 1. Film grain — extremely subtle, slow step animation */
+.lp__bg-grain {
+    position: fixed;
+    inset: -10%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation: lp-grain 1.2s steps(3) infinite;
+}
+
+@keyframes lp-grain {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    33% {
+        transform: translate(-1%, -1%);
+    }
+
+    66% {
+        transform: translate(1%, 0.5%);
+    }
+
+    100% {
+        transform: translate(-0.5%, 1%);
+    }
+}
+
+/* 2. Vignette — deep edge darkening */
+.lp__bg-vignette {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    background:
+        radial-gradient(ellipse 80% 80% at 50% 50%,
+            transparent 30%,
+            rgba(0, 0, 0, 0.5) 70%,
+            rgba(0, 0, 0, 0.85) 100%);
+}
+
+/* 3. Single slow light beam — subtle, not flickering */
+.lp__bg-beam {
+    position: fixed;
+    top: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    background: radial-gradient(ellipse 100% 80% at 50% 0%,
+            rgba(255, 255, 255, 0.025) 0%,
+            transparent 60%);
+    animation: lp-beam 18s ease-in-out infinite;
+}
+
+@keyframes lp-beam {
+
+    0%,
+    100% {
+        transform: translateX(-50%) translateX(-8%);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: translateX(-50%) translateX(8%);
+        opacity: 1;
+    }
+}
+
+/* 4. Parallax shadow blob — very slow, bottom-weighted */
+.lp__bg-parallax-shadow {
+    position: fixed;
+    bottom: -10%;
+    left: 10%;
+    width: 80%;
+    height: 60%;
+    pointer-events: none;
+    z-index: 2;
+    background: radial-gradient(ellipse at center,
+            rgba(139, 0, 0, 0.07) 0%,
+            transparent 70%);
+    filter: blur(60px);
+    animation: lp-shadow 24s ease-in-out infinite;
+}
+
+@keyframes lp-shadow {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    33% {
+        transform: translate(4%, -3%) scale(1.05);
+    }
+
+    66% {
+        transform: translate(-3%, 2%) scale(0.97);
+    }
+}
+
+/* ARG pulse */
+.lp__arg-pulse {
+    position: fixed;
+    inset: 0;
+    z-index: 3;
+    background: rgba(139, 0, 0, 0.1);
+    pointer-events: none;
+    animation: lp-arg 0.8s ease-out forwards;
+}
+
+@keyframes lp-arg {
+    0% {
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/* ── Corner accents ─────────────────────────────────── */
+.lp__corner {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    pointer-events: none;
+    z-index: 10;
+    border-color: rgba(139, 0, 0, 0.35);
+    border-style: solid;
+    opacity: 0.6;
+}
+
+.lp__corner--tl {
+    top: 20px;
+    left: 20px;
+    border-width: 1px 0 0 1px;
+}
+
+.lp__corner--tr {
+    top: 20px;
+    right: 20px;
+    border-width: 1px 1px 0 0;
+}
+
+.lp__corner--bl {
+    bottom: 20px;
+    left: 20px;
+    border-width: 0 0 1px 1px;
+}
+
+.lp__corner--br {
+    bottom: 20px;
+    right: 20px;
+    border-width: 0 1px 1px 0;
+}
+
+/* =====================================================
+   BOOT PHASE
+   ===================================================== */
+.lp__boot {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+}
+
+.lp__terminal {
+    font-family: var(--lp-mono);
+    font-size: 0.875rem;
+    color: rgba(232, 224, 208, 0.65);
+    min-width: 340px;
+    line-height: 1.8;
+}
+
+.lp__terminal-line {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    opacity: 0;
+    animation: lp-line-in 0.25s ease forwards;
+}
+
+.lp__terminal-line--done {
+    opacity: 0.6;
+}
+
+.lp__terminal-tick {
+    color: var(--lp-blood-bright);
+    font-weight: 700;
+    width: 1ch;
+    flex-shrink: 0;
+}
+
+.lp__terminal-tick--active {
+    color: rgba(232, 224, 208, 0.4);
+}
+
+@keyframes lp-line-in {
+    to {
+        opacity: 1;
+    }
+}
+
+.lp__cursor {
+    animation: lp-blink 1s steps(2) infinite;
+}
+
+@keyframes lp-blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Slash transition */
+.lp__slash {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 160vw;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--lp-blood-bright), transparent);
+    box-shadow: 0 0 20px rgba(196, 30, 58, 0.6);
+    transform: translate(-50%, -50%) rotate(-42deg) scaleX(0);
+    z-index: 60;
+    animation: lp-slash 0.65s var(--lp-ease) forwards;
+}
+
+@keyframes lp-slash {
+    to {
+        transform: translate(-50%, -50%) rotate(-42deg) scaleX(1);
+    }
+}
+
+/* =====================================================
+   MAIN SCENE — centred column layout
+   ===================================================== */
+.lp__scene {
+    position: relative;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    width: 100%;
+    padding: 7rem 1.5rem 4rem;
+}
+
+/* =====================================================
+   LEVEL 1 — HERO (highest size, highest contrast)
+   ===================================================== */
+.lp__hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-6, 1.5rem);
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s var(--lp-ease), transform 1s var(--lp-ease);
+}
+
+.lp__hero--visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.lp__eyebrow {
+    font-family: var(--lp-mono);
+    font-size: var(--text-xs, 0.65rem);
+    letter-spacing: 0.4em;
+    color: rgba(139, 0, 0, 0.75);
+    text-transform: uppercase;
+    margin: 0;
+}
+
+/* PRISMA — dominant, highest weight */
+.lp__title {
+    font-family: var(--lp-serif);
+    font-size: clamp(5.5rem, 18vw, 13rem);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: 0.18em;
+    color: var(--lp-ivory);
+    text-shadow:
+        0 0 60px rgba(232, 224, 208, 0.08),
+        0 4px 12px rgba(0, 0, 0, 0.9);
+    margin: 0;
+    display: flex;
+    align-items: baseline;
+    perspective: 600px;
+    position: relative;
+}
+
+/* Subtle red underline that seals after load */
+.lp__title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--lp-blood-bright), transparent);
+    animation: lp-underline 0.8s ease 1.5s forwards;
+}
+
+@keyframes lp-underline {
+    to {
+        width: 65%;
+    }
+}
+
+.lp__title-letter {
+    display: inline-block;
+    animation: lp-letter-drop 0.5s var(--lp-ease) both;
+    animation-delay: calc(var(--i, 0) * 0.07s + 0.5s);
+}
+
+@keyframes lp-letter-drop {
+    0% {
+        opacity: 0;
+        transform: translateY(-24px) rotateX(20deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) rotateX(0);
+    }
+}
+
+/* Glitch state — subtle colour only, no displacement */
+.lp__title--glitch .lp__title-letter {
+    color: var(--lp-blood-bright);
+    text-shadow: 0 0 12px rgba(196, 30, 58, 0.6);
+    transition: color 0.05s, text-shadow 0.05s;
+}
+
+.lp__tagline {
+    font-family: var(--lp-mono);
+    font-size: clamp(0.55rem, 1.5vw, 0.75rem);
+    letter-spacing: 0.28em;
+    color: var(--lp-muted);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin: 0;
+}
+
+.lp__tagline-rule {
+    display: inline-block;
+    width: 28px;
+    height: 1px;
+    background: rgba(139, 0, 0, 0.5);
+    flex-shrink: 0;
+}
+
+/* Primary CTA — solid, commanding */
+.lp__cta-primary {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    background: rgba(139, 0, 0, 0.15);
+    border: 1px solid rgba(139, 0, 0, 0.5);
+    color: var(--lp-ivory);
+    font-family: var(--lp-mono);
+    padding: 1.35rem 3.5rem 1.2rem;
+    cursor: pointer;
+    margin-top: var(--space-4, 1rem);
+    transition: background 0.3s, border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    min-width: 280px;
+}
+
+.lp__cta-primary:hover {
+    background: rgba(139, 0, 0, 0.28);
+    border-color: var(--lp-blood-bright);
+    box-shadow: 0 0 32px rgba(196, 30, 58, 0.25);
+    transform: translateY(-2px);
+}
+
+.lp__cta-primary:active {
+    transform: translateY(0);
+}
+
+.lp__cta-primary__label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+}
+
+.lp__cta-primary__sub {
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    color: var(--lp-muted);
+    text-transform: uppercase;
+}
+
+.lp__cta-primary__arrow {
+    position: absolute;
+    right: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    color: rgba(196, 30, 58, 0.6);
+    transition: transform 0.3s, color 0.3s;
+}
+
+.lp__cta-primary:hover .lp__cta-primary__arrow {
+    transform: translateY(-50%) translateX(4px);
+    color: var(--lp-blood-bright);
+}
+
+/* =====================================================
+   LEVEL 2 — GLASS PANEL (secondary info)
+   ===================================================== */
+.lp__glass-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 1.75rem 2.5rem;
+    width: 100%;
+    max-width: 480px;
+    position: relative;
+
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.9s var(--lp-ease) 0.35s, transform 0.9s var(--lp-ease) 0.35s;
+}
+
+.lp__glass-panel--visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.lp__panel-section {
+    width: 100%;
+    text-align: center;
+}
+
+.lp__panel-label {
+    font-family: var(--lp-mono);
+    font-size: 0.52rem;
+    letter-spacing: 0.32em;
+    color: rgba(139, 0, 0, 0.6);
+    text-transform: uppercase;
+    margin: 0 0 0.75rem;
+}
+
+/* Countdown clock */
+.lp__clock {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.lp-tick {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 52px;
+}
+
+.lp-tick__value {
+    font-family: var(--lp-serif);
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    font-weight: 900;
+    color: var(--lp-ivory);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    text-shadow: 0 0 20px rgba(232, 224, 208, 0.1);
+}
+
+.lp-tick__label {
+    font-family: var(--lp-mono);
+    font-size: 0.45rem;
+    letter-spacing: 0.2em;
+    color: rgba(232, 224, 208, 0.3);
+    margin-top: 0.25rem;
+}
+
+.lp__clock-sep {
+    font-family: var(--lp-serif);
+    font-size: 1.8rem;
+    color: rgba(139, 0, 0, 0.4);
+    margin-bottom: 14px;
+    animation: lp-sep-blink 1s steps(2) infinite;
+}
+
+@keyframes lp-sep-blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.15;
+    }
+}
+
+.lp__panel-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+}
+
+/* Secondary CTA — ghost style, clearly lower priority */
+.lp__cta-secondary {
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--lp-muted);
+    font-family: var(--lp-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 0.65rem 2rem;
+    cursor: pointer;
+    transition: border-color 0.3s, color 0.3s;
+    width: 100%;
+}
+
+.lp__cta-secondary:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--lp-ivory);
+}
+
+/* Meta */
+.lp__panel-meta {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--lp-mono);
+    font-size: 0.48rem;
+    letter-spacing: 0.18em;
+    color: rgba(232, 224, 208, 0.2);
+    text-transform: uppercase;
+    margin-top: 0.25rem;
+}
+
+/* =====================================================
+   LEVEL 3 — WHISPER (barely visible)
+   ===================================================== */
+.lp__whisper {
+    position: fixed;
+    bottom: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font-family: var(--lp-mono);
+    font-size: 0.45rem;
+    letter-spacing: 0.3em;
+    color: rgba(232, 224, 208, 0.08);
+    pointer-events: none;
+    z-index: 30;
+    opacity: 0;
+    transition: opacity 2s ease 1.5s;
+}
+
+.lp__whisper--visible {
+    opacity: 1;
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+@media (max-width: 640px) {
+    .lp__scene {
+        padding: 6rem 1.25rem 3rem;
+        gap: 2rem;
+    }
+
+    .lp__glass-panel {
+        padding: 1.5rem 1.25rem;
+    }
+
+    .lp__cta-primary {
+        min-width: unset;
+        width: 100%;
+        padding: 1rem 2rem;
+    }
+
+    .lp__corner {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+/* =====================================================
+   REDUCED MOTION
+   ===================================================== */
+@media (prefers-reduced-motion: reduce) {
+
+    .lp__bg-grain,
+    .lp__bg-beam,
+    .lp__bg-parallax-shadow,
+    .lp__cursor,
+    .lp__title-letter,
+    .lp__clock-sep {
+        animation: none !important;
+    }
+
+    .lp__hero,
+    .lp__glass-panel {
+        transition-duration: 0.01ms !important;
+    }
+}

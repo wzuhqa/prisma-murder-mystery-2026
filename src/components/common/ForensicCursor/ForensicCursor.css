@@ -1,0 +1,73 @@
+.forensic-cursor,
+.forensic-spotlight {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 999999;
+    /* Ultra high */
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+.forensic-cursor {
+    opacity: 1;
+}
+
+.forensic-spotlight {
+    opacity: 0.8;
+}
+
+.forensic-cursor {
+    z-index: 100001;
+    /* Above everything else */
+}
+
+/* Base style for actual dot */
+.cursor-dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 4px;
+    height: 4px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.cursor-aura {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, rgba(122, 14, 18, 0.6) 0%, transparent 70%);
+    border-radius: 50%;
+    transition: width 0.3s, height 0.3s;
+}
+
+.forensic-cursor--pointer .cursor-aura {
+    width: 50px;
+    height: 50px;
+    background: radial-gradient(circle, rgba(122, 14, 18, 0.8) 0%, transparent 60%);
+    border: 1px solid rgba(122, 14, 18, 0.3);
+}
+
+/* Spotlight Effect */
+.forensic-spotlight {
+    z-index: 9998;
+    /* Under cursor, over base background */
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 20%, transparent 70%);
+    border-radius: 50%;
+    mix-blend-mode: screen;
+}
+
+.spotlight-focus {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+}

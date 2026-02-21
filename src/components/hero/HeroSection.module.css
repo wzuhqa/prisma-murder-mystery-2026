@@ -1,0 +1,705 @@
+.heroRoot {
+  position: relative;
+  min-height: 100vh;
+  /* DESK BACKGROUND: Dark Wood Texture with Vignette */
+  background-color: #0d0b0a;
+  background-image:
+    radial-gradient(circle at 60% 40%, rgba(255, 255, 230, 0.05) 0%, transparent 60%),
+    /* Subtle Desk Lamp */
+    radial-gradient(circle at center, transparent 30%, rgba(0, 0, 0, 0.4) 100%),
+    /* Vignette */
+    linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='wood'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.01 0.4' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0.1 0 1 0 0 0.05 0 0 1 0 0.02 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23wood)' opacity='0.4'/%3E%3C/svg%3E");
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 6rem 1rem 4rem;
+}
+
+.deskBackground {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* ── Dust Particles Layer ── */
+.dustOverlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  z-index: 5;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  animation: dust-flicker 8s infinite steps(2);
+}
+
+@keyframes dust-flicker {
+
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: translate(0, 0);
+  }
+
+  25% {
+    opacity: 0.5;
+    transform: translate(2px, -2px);
+  }
+
+  50% {
+    opacity: 0.4;
+    transform: translate(-1px, 1px);
+  }
+}
+
+/* ── Background: CONFIDENTIAL watermarks ── */
+.watermarkLeft,
+.watermarkRight {
+  position: absolute;
+  font-family: 'Courier New', monospace;
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.02);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+.watermarkLeft {
+  top: 18%;
+  left: -2%;
+  transform: rotate(-25deg);
+}
+
+.watermarkRight {
+  bottom: 18%;
+  right: -2%;
+  transform: rotate(15deg);
+}
+
+/* ── Background: Red string lines ── */
+.redStrings {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.3;
+}
+
+/* ── V2.5 Noir Atmosphere ── */
+.lampGlow {
+  position: absolute;
+  top: 15%;
+  left: 20%;
+  width: 1000px;
+  height: 1000px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 60%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hiddenUneaseText {
+  position: absolute;
+  bottom: 5rem;
+  right: 5rem;
+  font-family: var(--nav-mono);
+  font-size: 0.6rem;
+  color: var(--text-meta);
+  opacity: 0;
+  transition: opacity 1s ease;
+  pointer-events: none;
+  z-index: 5;
+  text-align: right;
+  letter-spacing: 0.5em;
+}
+
+.heroRoot:hover .hiddenUneaseText {
+  opacity: 0.05;
+}
+
+/* ── Case File Card (V2.5 Noir Refinement) ── */
+.caseCard {
+  position: relative;
+  width: min(100%, 650px);
+  min-height: 850px;
+  background-color: var(--bg-panel);
+  /* #1A1A1E Charcoal */
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+
+  /* Directional Shadow (Desk Lamp) */
+  box-shadow:
+    -5px -5px 20px rgba(255, 255, 255, 0.02),
+    /* Soft top-left highlight */
+    20px 30px 60px rgba(0, 0, 0, 0.9);
+  /* Heavy bottom-right shadow */
+
+  padding: 4rem;
+  z-index: 10;
+  border: 1px solid #222228;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.1s ease;
+  transform-style: preserve-3d;
+  /* Torn edge effect using clip-path */
+  clip-path: polygon(0% 0%, 100% 0%,
+      100% 95%, 98% 97%, 95% 94%, 92% 98%, 88% 95%,
+      85% 99%, 80% 94%, 75% 97%, 0% 100%);
+
+  border-radius: 2px 40px 5px 2px;
+  overflow: visible;
+}
+
+/* ── Folder Tab ── */
+.folderTab {
+  position: absolute;
+  top: -38px;
+  left: 10%;
+  height: 40px;
+  width: min(80%, 180px);
+  background-color: #c9b794;
+  /* Slightly darker */
+  border-radius: 15px 30px 0 0;
+  box-shadow: -2px -5px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: -1;
+  transform: rotate(0.5deg);
+}
+
+.tabId {
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem;
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.35);
+  letter-spacing: 0.15em;
+}
+
+/* ── Paperclip ── */
+.paperclip {
+  position: absolute;
+  top: -20px;
+  right: 12%;
+  width: min(10%, 40px);
+  height: 80px;
+  color: #a0a0a0;
+  transform: rotate(15deg);
+  filter: drop-shadow(2px 4px 3px rgba(0, 0, 0, 0.4));
+  z-index: 50;
+}
+
+/* ── Restricted Stamp ── */
+.restrictedStamp {
+  position: absolute;
+  top: 40px;
+  right: -5%;
+  border: 4px solid #8b0000;
+  color: #8b0000;
+  font-family: 'Courier New', monospace;
+  font-size: 1.2rem;
+  font-weight: 900;
+  padding: 0.4rem 1.2rem;
+  transform: rotate(25deg);
+  opacity: 0.4;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  letter-spacing: 0.1em;
+}
+
+/* ── Handwritten Scribble ── */
+.handwrittenScribble {
+  position: absolute;
+  top: 150px;
+  right: 40px;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.1rem;
+  color: #1a1a1a;
+  opacity: 0.2;
+  transform: rotate(-5deg);
+  pointer-events: none;
+}
+
+.reopenNote {
+  position: absolute;
+  top: -20px;
+  right: -40px;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 0.9rem;
+  color: #8b0000;
+  opacity: 0.3;
+  transform: rotate(10deg);
+}
+
+/* ── Evidence Threads Overlay ── */
+.evidenceThreads {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.threadPath {
+  stroke: #8b0000;
+  stroke-width: 1.5;
+  fill: none;
+  opacity: 0.15;
+  stroke-dasharray: 4 2;
+}
+
+/* ── Case File ID ── */
+.caseFileId {
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.5);
+  margin-bottom: 3rem;
+  font-weight: 900;
+  /* FORCE MAX BOLD */
+  border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+  padding-bottom: 5px;
+  display: inline-block;
+}
+
+/* ── Title Row ── */
+.titleRow {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.titleWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.prismaTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(4rem, 15vw, 9rem);
+  font-weight: 900;
+  color: #1a1a1a;
+  margin: 0;
+  mix-blend-mode: multiply;
+  line-height: 0.85;
+}
+
+.universityBadge {
+  font-family: 'Courier New', monospace;
+  font-size: 0.65rem;
+  color: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 0.4rem 1rem;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+}
+
+/* ── Institutional Meta ── */
+.metaBlock {
+  position: relative;
+  margin: 3rem 0;
+  padding-left: 1.5rem;
+  border-left: 3px solid #8b0000;
+  text-align: left;
+}
+
+.metaRow {
+  display: flex;
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  margin-bottom: 0.5rem;
+  white-space: pre;
+  font-weight: 800;
+  /* FORCE BOLD */
+}
+
+.metaLabel {
+  width: min(50%, 220px);
+  opacity: 0.4;
+  font-weight: 900;
+}
+
+.metaValue {
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+/* ── Evidence Tag (Layered Above) ── */
+.evidenceTag {
+  position: absolute;
+  bottom: 20px;
+  right: -5%;
+  /* Hanging outside more */
+  background: #e8d89a;
+  color: #222;
+  padding: 0.8rem 1.2rem;
+  font-family: 'Courier New', monospace;
+  transform: rotate(8deg);
+  box-shadow: 4px 8px 15px rgba(0, 0, 0, 0.5);
+  border: 1px solid #d4c48a;
+  z-index: 50;
+}
+
+.evidenceTag::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  background: #111;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px #e8d89a;
+}
+
+.tagLabel {
+  font-size: 0.6rem;
+  font-weight: 900;
+  display: block;
+}
+
+.tagId {
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: #8b0000;
+}
+
+/* ── Blood Cursor Trail ── */
+.bloodTrail {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  background: var(--nav-crimson);
+  filter: blur(2px);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ── CTA Buttons: Tabs & Slips ── */
+.buttonGroup {
+  display: flex;
+  gap: 2.5rem;
+  align-items: flex-end;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.tabButton {
+  position: relative;
+  background: #141418;
+  border: 1px solid #2A2A30;
+  color: #D8D8D8;
+  padding: 1rem 2.5rem;
+  font-family: var(--nav-mono);
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 4px;
+  /* Less rounded for clinical feel */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  font-size: 0.8rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  letter-spacing: 0.1em;
+}
+
+.tabButton:hover {
+  background: #0d0d10;
+  border-color: var(--color-blood-accent);
+  box-shadow:
+    inset 0 0 10px rgba(122, 14, 18, 0.2),
+    0 20px 40px rgba(0, 0, 0, 0.8);
+  transform: translateY(8px) scale(1.02);
+}
+
+.tabButton:active {
+  transform: translateY(8px) scale(0.98);
+  filter: brightness(1.2);
+}
+
+/* Fingerprint Scan Line (Subtle) */
+.scannerLine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(122, 14, 18, 0.5);
+  box-shadow: 0 0 15px rgba(122, 14, 18, 0.8);
+  transform: translateY(-100%);
+  pointer-events: none;
+  opacity: 0;
+}
+
+.tabButton:hover .scannerLine {
+  opacity: 1;
+  animation: fingerprint-scan 2s linear infinite;
+}
+
+@keyframes fingerprint-scan {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.approvalClip {
+  position: relative;
+  background: #17171C;
+  border: 1px solid #333;
+  padding: 1.2rem 2rem;
+  color: #B3B3B8;
+  text-decoration: none;
+  font-family: var(--nav-mono);
+  box-shadow: 10px 20px 40px rgba(0, 0, 0, 0.7);
+  transform: rotate(-3deg);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s;
+  overflow: hidden;
+}
+
+.paperRipple {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.01), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.approvalClip:hover .paperRipple {
+  opacity: 1;
+  animation: ripple-shimmer 2s infinite linear;
+}
+
+@keyframes ripple-shimmer {
+  0% {
+    transform: translateX(-100%) skewX(-20deg);
+  }
+
+  100% {
+    transform: translateX(200%) skewX(-20deg);
+  }
+}
+
+.clipPin {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 10px;
+  background: var(--color-blood-accent);
+  border-radius: 2px;
+  opacity: 0.8;
+}
+
+.clipText {
+  font-weight: 900;
+  font-size: 0.9rem;
+  color: #222;
+}
+
+.clipSubtext {
+  font-size: 0.6rem;
+  opacity: 0.5;
+}
+
+.approvalClip:hover {
+  background: #1c1c21;
+  border-color: #6C6C72;
+  transform: rotate(0deg) translateY(-5px);
+  box-shadow: 15px 30px 60px rgba(0, 0, 0, 0.8);
+  color: #E5E5E5;
+}
+
+/* ── Typography Cleanup ── */
+.subtitle,
+.hashtag,
+.date {
+  color: var(--text-meta);
+  font-family: var(--nav-mono);
+  font-weight: 800;
+  /* FORCE BOLD FOR LEGIBILITY */
+  letter-spacing: 0.2em;
+}
+
+.hashtag {
+  color: #8b0000;
+  font-style: italic;
+  font-weight: 800;
+  /* FORCE BOLD */
+  text-shadow: 0 0 5px rgba(139, 0, 0, 0.2);
+}
+
+.confidentialStamp {
+  position: absolute;
+  bottom: 100px;
+  left: 20px;
+  border: 4px solid rgba(139, 0, 0, 0.2);
+  color: rgba(139, 0, 0, 0.2);
+  font-family: 'Courier New', monospace;
+  font-size: 1.5rem;
+  font-weight: 900;
+  padding: 0.5rem 1.5rem;
+  transform: rotate(-10deg);
+  pointer-events: none;
+}
+
+/* ── Scroll Indicator ── */
+.scrollIndicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0.3;
+  z-index: 100;
+}
+
+.scrollLine {
+  width: 1px;
+  height: 32px;
+  background: #fff;
+}
+
+.scrollText {
+  font-family: 'Courier New', monospace;
+  font-size: 0.6rem;
+  color: #fff;
+  margin-top: 5px;
+}
+
+/* ── Mobile Optimization ── */
+@media (max-width: 768px) {
+  .heroRoot {
+    padding: 5rem 1rem 3rem;
+  }
+
+  .caseCard {
+    transform: none !important;
+    width: 100%;
+    padding: 3rem 1.5rem;
+    clip-path: none;
+    border-radius: 8px;
+    min-height: auto;
+  }
+
+  .prismaTitle {
+    font-size: clamp(3rem, 20vw, 6rem);
+    text-align: center;
+  }
+
+  .folderTab,
+  .paperclip,
+  .restrictedStamp,
+  .evidenceTag,
+  .handwrittenScribble {
+    display: none;
+  }
+
+  .buttonGroup {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.5rem;
+  }
+
+  .metaRow {
+    flex-direction: column;
+    white-space: normal;
+    text-align: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .metaBlock {
+    padding-left: 0;
+    border-left: none;
+    border-top: 2px solid #8b0000;
+    padding-top: 1.5rem;
+  }
+
+  .metaLabel {
+    width: auto;
+    margin-bottom: 0.2rem;
+  }
+}
+
+/* ── Hidden Easter Egg Terminal ── */
+.easterEggTerminal {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 400px;
+  background-color: #0A0A0A;
+  border: 1px solid #7a0e12;
+  box-shadow: 0 0 20px rgba(122, 14, 18, 0.4), inset 0 0 10px rgba(122, 14, 18, 0.2);
+  color: #E5E5E5;
+  font-family: 'Fira Code', 'Courier New', monospace;
+  z-index: 10000;
+  padding: 1px;
+  display: flex;
+  flex-direction: column;
+}
+
+.terminalHeader {
+  background-color: #1A1A1A;
+  border-bottom: 1px solid #7a0e12;
+  padding: 8px 12px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  color: #7a0e12;
+}
+
+.terminalBody {
+  padding: 16px;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  min-height: 120px;
+}
+
+.terminalBody p {
+  margin-bottom: 8px;
+}
+
+.terminalBlink {
+  animation: blink 1s step-end infinite;
+  color: #7a0e12;
+}
+
+.terminalClose {
+  background: transparent;
+  border: none;
+  border-top: 1px solid #333;
+  color: #666;
+  padding: 8px;
+  font-family: inherit;
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: right;
+}
+
+.terminalClose:hover {
+  color: #E5E5E5;
+  background: #1A1A1A;
+}

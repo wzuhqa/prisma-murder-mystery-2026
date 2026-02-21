@@ -1,0 +1,17 @@
+
+C:\Users\Akul\Desktop\prisma-event-page\prisma-murder-mystery\src\components\evidence\EvidenceBoard\EvidenceBoard.jsx
+    1:29  error  'useState' is defined but never used. Allowed unused vars must match /^(motion|React|_|[A-Z_])/u                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     no-unused-vars
+  129:35  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+  127 |                         key={i}
+  128 |                         sponsor={sponsor}
+> 129 |                         rotation={Math.random() * 12 - 6} // Random rotation -6 to +6
+      |                                   ^^^^^^^^^^^^^ Cannot call impure function
+  130 |                     />
+  131 |                 ))}
+  132 |             </div>  react-hooks/purity
+
+??? 2 problems (2 errors, 0 warnings)
+

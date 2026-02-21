@@ -1,0 +1,24 @@
+.decryptText {
+  font-family: 'Fira Code', 'Courier New', monospace;
+  position: relative;
+  display: inline-block;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  color: inherit;
+}
+
+.cursor {
+  display: inline-block;
+  animation: blink 1s step-end infinite;
+  color: var(--color-blood-accent, #8b0000);
+  background-color: var(--color-chalk, #e5e5e5);
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}

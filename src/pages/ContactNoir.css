@@ -1,0 +1,1485 @@
+/* ============================================
+   NOIR INTERROGATION CONTACT PAGE STYLES
+   1940s Detective Noir + Psychological Horror
+   Extreme Psychological Dread Immersion
+   ============================================ */
+
+/* Entry Animation Sequence */
+.entry-sequence {
+    position: fixed;
+    inset: 0;
+    background: #000000;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.entry-slash {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150vw;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #c41e3a, transparent);
+    transform: translate(-50%, -50%) rotate(-45deg);
+    transform-origin: center;
+    box-shadow: 0 0 20px rgba(196, 30, 58, 0.8);
+}
+
+.entry-text {
+    text-align: center;
+    z-index: 1;
+}
+
+.entry-line,
+.entry-case,
+.entry-status {
+    font-family: 'Courier Prime', monospace;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(232, 224, 208, 0.9);
+}
+
+.entry-line {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    color: rgba(232, 224, 208, 0.6);
+}
+
+.entry-case {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: #c41e3a;
+}
+
+.entry-status {
+    font-size: 0.8rem;
+    color: rgba(232, 224, 208, 0.5);
+}
+
+/* Watching Message (Idle) */
+.watching-message {
+    position: fixed;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-style: italic;
+    color: rgba(196, 30, 58, 0.3);
+    z-index: 5;
+    pointer-events: none;
+    text-shadow: 0 0 20px rgba(196, 30, 58, 0.4);
+}
+
+/* Background Distortion */
+.background-distortion {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.8s ease-out;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.background-distortion.active {
+    opacity: 1;
+    animation: distortion-ripple 3s ease-in-out infinite;
+}
+
+@keyframes distortion-ripple {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.02);
+    }
+}
+
+/* Container & Atmosphere */
+.noir-contact-container {
+    position: relative;
+    min-height: 100vh;
+    background: radial-gradient(ellipse at center, #1a1a1a 0%, #0a0a0a 100%);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 1.5rem 3rem;
+}
+
+/* Vignette overlay */
+.noir-vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 30%, rgba(0, 0, 0, 0.5) 100%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Film grain texture */
+.noir-grain {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.5' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+    opacity: 0.3;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    z-index: 3;
+    animation: grain-shift 8s steps(10) infinite;
+}
+
+@keyframes grain-shift {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    10% {
+        transform: translate(-5%, -5%);
+    }
+
+    20% {
+        transform: translate(-10%, 5%);
+    }
+
+    30% {
+        transform: translate(5%, -10%);
+    }
+
+    40% {
+        transform: translate(-5%, 15%);
+    }
+
+    50% {
+        transform: translate(-10%, 5%);
+    }
+
+    60% {
+        transform: translate(15%, 0);
+    }
+
+    70% {
+        transform: translate(0, 10%);
+    }
+
+    80% {
+        transform: translate(-15%, 0);
+    }
+
+    90% {
+        transform: translate(10%, 5%);
+    }
+}
+
+/* Overhead spotlight */
+.noir-spotlight {
+    position: absolute;
+    top: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120%;
+    height: 140%;
+    background: radial-gradient(ellipse at center top, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity 0.1s;
+}
+
+.noir-spotlight.flicker {
+    opacity: 0.5;
+}
+
+.noir-spotlight.intensified {
+    background: radial-gradient(ellipse at center top, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+    transition: background 0.6s ease-out;
+}
+
+/* Red ambient pulse */
+.red-ambient-pulse {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 70%, rgba(196, 30, 58, 0.08) 0%, transparent 60%);
+    animation: red-pulse 8s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@keyframes red-pulse {
+
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+}
+
+.red-ambient-pulse.deletion-pulse {
+    animation: deletion-flash 1s ease-out;
+}
+
+@keyframes deletion-flash {
+    0% {
+        opacity: 0.3;
+    }
+
+    30% {
+        opacity: 0.9;
+        background: radial-gradient(ellipse at center, rgba(196, 30, 58, 0.15) 0%, transparent 60%);
+    }
+
+    100% {
+        opacity: 0.3;
+    }
+}
+
+/* Shadow presence (extremely subtle horror element) */
+.shadow-presence {
+    position: absolute;
+    bottom: 10%;
+    right: 15%;
+    width: 200px;
+    height: 300px;
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.3) 0%, transparent 70%);
+    filter: blur(50px);
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.3;
+}
+
+/* Drifting smoke */
+.smoke-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.smoke {
+    position: absolute;
+    width: 300%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent 0%, rgba(100, 100, 120, 0.03) 30%, rgba(120, 120, 140, 0.04) 50%, rgba(100, 100, 120, 0.03) 70%, transparent 100%);
+    filter: blur(50px);
+    opacity: 0;
+}
+
+.smoke-1 {
+    top: 10%;
+    animation: smoke-drift-1 25s ease-in-out infinite;
+}
+
+.smoke-2 {
+    top: 40%;
+    animation: smoke-drift-2 30s ease-in-out infinite 5s;
+}
+
+.smoke-3 {
+    top: 70%;
+    animation: smoke-drift-3 35s ease-in-out infinite 10s;
+}
+
+@keyframes smoke-drift-1 {
+
+    0%,
+    100% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    20%,
+    80% {
+        opacity: 0.3;
+    }
+
+    50% {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes smoke-drift-2 {
+
+    0%,
+    100% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    20%,
+    80% {
+        opacity: 0.25;
+    }
+
+    50% {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes smoke-drift-3 {
+
+    0%,
+    100% {
+        transform: translateX(-80%);
+        opacity: 0;
+    }
+
+    20%,
+    80% {
+        opacity: 0.2;
+    }
+
+    50% {
+        transform: translateX(20%);
+    }
+}
+
+/* Content wrapper */
+.noir-content-wrapper {
+    position: relative;
+    z-index: 10;
+    max-width: 1200px;
+    width: 100%;
+}
+
+/* Story Panel */
+.story-panel {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 1.5rem 2rem;
+    background: rgba(10, 10, 10, 0.6);
+    border-left: 2px solid rgba(196, 30, 58, 0.4);
+    border-right: 2px solid rgba(196, 30, 58, 0.4);
+}
+
+.story-panel p {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: rgba(232, 224, 208, 0.7);
+    line-height: 1.6;
+    margin: 0;
+    letter-spacing: 0.02em;
+}
+
+.story-panel .highlight {
+    color: #c41e3a;
+    font-weight: 600;
+}
+
+/* Content Grid */
+.content-grid {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+/* Case Status Side Panel */
+.status-panel {
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(17, 17, 17, 0.7) 100%);
+    border: 1px solid rgba(200, 200, 200, 0.15);
+    padding: 1.5rem 1rem;
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.status-header {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: rgba(196, 30, 58, 0.9);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.status-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(200, 200, 200, 0.2), transparent);
+    margin: 1rem 0;
+}
+
+.status-item {
+    margin-bottom: 1.25rem;
+}
+
+.status-label {
+    display: block;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: rgba(232, 224, 208, 0.4);
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+}
+
+.status-value {
+    display: block;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.75rem;
+    color: rgba(232, 224, 208, 0.9);
+    letter-spacing: 0.05em;
+}
+
+.status-active {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #c41e3a;
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #c41e3a;
+    animation: status-blink 2s ease-in-out infinite;
+    box-shadow: 0 0 8px rgba(196, 30, 58, 0.8);
+}
+
+@keyframes status-blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
+}
+
+.status-high {
+    color: #ff1744;
+    font-weight: 700;
+}
+
+.status-footer {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    color: rgba(232, 224, 208, 0.3);
+    text-align: center;
+    margin-top: 1rem;
+    animation: subtle-flicker 5s ease-in-out infinite;
+}
+
+@keyframes subtle-flicker {
+
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+}
+
+/* Hero Section */
+.noir-hero {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.evidence-tag {
+    display: inline-block;
+    font-family: 'Courier Prime', 'Courier New', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: #c41e3a;
+    border: 1px solid #c41e3a;
+    padding: 0.25rem 1rem;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.noir-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(4rem, 12vw, 7rem);
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #e8e0d0;
+    text-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.8),
+        0 4px 8px rgba(0, 0, 0, 0.6),
+        0 8px 16px rgba(0, 0, 0, 0.4);
+    margin: 0;
+    line-height: 0.9;
+}
+
+.noir-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    color: rgba(232, 224, 208, 0.6);
+    letter-spacing: 0.05em;
+    margin-top: 1rem;
+    font-weight: 300;
+}
+
+.case-number {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.7rem;
+    color: rgba(232, 224, 208, 0.3);
+    letter-spacing: 0.1em;
+    margin-top: 0.5rem;
+}
+
+/* Dossier Container */
+.dossier-container {
+    background: linear-gradient(135deg, #1a1a1a 0%, #111111 100%);
+    border: 1px solid rgba(200, 200, 200, 0.1);
+    box-shadow:
+        inset 0 2px 4px rgba(0, 0, 0, 0.5),
+        0 8px 32px rgba(0, 0, 0, 0.8);
+    padding: 0;
+    position: relative;
+}
+
+.dossier-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid rgba(200, 200, 200, 0.1);
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.dossier-label {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: rgba(232, 224, 208, 0.8);
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.dossier-stamp {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: #c41e3a;
+    border: 2px solid #c41e3a;
+    padding: 0.25rem 0.75rem;
+    transform: rotate(-3deg);
+    opacity: 0.7;
+}
+
+/* Form */
+.dossier-form {
+    padding: 2.5rem 2rem;
+}
+
+.form-field {
+    margin-bottom: 2rem;
+}
+
+.field-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.label-text {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: rgba(232, 224, 208, 0.6);
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.label-required {
+    color: #c41e3a;
+    font-size: 0.9rem;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.dossier-input {
+    width: 100%;
+    background: rgba(10, 10, 10, 0.8);
+    border: 1px solid rgba(200, 200, 200, 0.15);
+    color: #e8e0d0;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    padding: 0.875rem 1rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.dossier-input:focus {
+    outline: none;
+    background: rgba(18, 18, 18, 0.9);
+    border-color: rgba(196, 30, 58, 0.4);
+    box-shadow:
+        inset 0 1px 3px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(196, 30, 58, 0.2);
+    transform: translateY(-1px);
+}
+
+.dossier-input::placeholder {
+    color: rgba(232, 224, 208, 0.25);
+    font-style: italic;
+}
+
+.dossier-input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.dossier-textarea {
+    resize: vertical;
+    min-height: 140px;
+    font-family: 'Courier Prime', monospace;
+    line-height: 1.6;
+    background-image:
+        repeating-linear-gradient(transparent,
+            transparent 1.5rem,
+            rgba(200, 200, 200, 0.03) 1.5rem,
+            rgba(200, 200, 200, 0.03) calc(1.5rem + 1px));
+}
+
+.focus-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #c41e3a, transparent);
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 8px rgba(196, 30, 58, 0.6);
+}
+
+.focus-line.active {
+    width: 100%;
+}
+
+/* Submit Button */
+.form-actions {
+    margin-top: 2.5rem;
+}
+
+.evidence-stamp-button {
+    position: relative;
+    width: 100%;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+    border: 2px solid rgba(200, 200, 200, 0.2);
+    color: #e8e0d0;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    font-weight: 700;
+    padding: 1.25rem 2rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    text-transform: uppercase;
+}
+
+.evidence-stamp-button:hover:not(:disabled) {
+    border-color: rgba(196, 30, 58, 0.6);
+    box-shadow:
+        0 0 20px rgba(196, 30, 58, 0.3),
+        inset 0 0 20px rgba(196, 30, 58, 0.1);
+    transform: translateY(-2px);
+}
+
+.evidence-stamp-button:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.evidence-stamp-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.stamp-text {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.stamp-border {
+    position: absolute;
+    inset: 4px;
+    border: 1px solid rgba(200, 200, 200, 0.1);
+    pointer-events: none;
+}
+
+.stamp-icon {
+    transition: transform 0.3s;
+}
+
+.evidence-stamp-button:hover:not(:disabled) .stamp-icon {
+    transform: translateX(4px) translateY(-4px);
+}
+
+.warning-notice {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    color: rgba(232, 224, 208, 0.4);
+    line-height: 1.4;
+}
+
+.warning-notice svg {
+    flex-shrink: 0;
+    color: rgba(196, 30, 58, 0.6);
+}
+
+/* Character Counter */
+.character-counter {
+    margin-left: auto;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.65rem;
+    color: rgba(232, 224, 208, 0.4);
+    font-weight: 400;
+}
+
+.label-optional {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.65rem;
+    color: rgba(232, 224, 208, 0.3);
+    font-weight: 400;
+    margin-left: 0.5rem;
+}
+
+/* Evidence Upload */
+.evidence-upload-wrapper {
+    position: relative;
+}
+
+.evidence-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.evidence-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    background: rgba(10, 10, 10, 0.8);
+    border: 1px solid rgba(200, 200, 200, 0.15);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.evidence-label:hover {
+    border-color: rgba(196, 30, 58, 0.4);
+    background: rgba(18, 18, 18, 0.9);
+}
+
+.paperclip-icon {
+    color: rgba(196, 30, 58, 0.7);
+    flex-shrink: 0;
+}
+
+.evidence-text {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: rgba(232, 224, 208, 0.6);
+    text-transform: uppercase;
+    flex: 1;
+}
+
+.evidence-slot {
+    position: absolute;
+    right: 1rem;
+    width: 30px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(200, 200, 200, 0.3), transparent);
+}
+
+.evidence-slot::before,
+.evidence-slot::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border: 1px solid rgba(200, 200, 200, 0.3);
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.evidence-slot::before {
+    left: -3px;
+}
+
+.evidence-slot::after {
+    right: -3px;
+}
+
+/* Confidential Stamp Overlay */
+.confidential-stamp-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 10, 10, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    backdrop-filter: blur(5px);
+}
+
+.stamp-received {
+    font-family: 'Courier Prime', monospace;
+    font-size: 4rem;
+    font-weight: 900;
+    letter-spacing: 0.2em;
+    color: #c41e3a;
+    border: 8px solid #c41e3a;
+    padding: 2rem 3rem;
+    text-transform: uppercase;
+    opacity: 0.8;
+    text-shadow: 0 0 20px rgba(196, 30, 58, 0.6);
+    box-shadow: inset 0 0 40px rgba(196, 30, 58, 0.2);
+}
+
+/* Success Message */
+.success-message {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 10, 10, 0.95);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+.success-icon {
+    font-size: 3rem;
+    color: #c41e3a;
+    margin-bottom: 1.5rem;
+    animation: success-pulse 2s ease-in-out;
+}
+
+@keyframes success-pulse {
+
+    0%,
+    100% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+}
+
+.success-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: #e8e0d0;
+    margin: 0 0 0.5rem;
+    font-weight: 600;
+}
+
+.success-subtext {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    color: rgba(232, 224, 208, 0.5);
+    margin: 0;
+    font-style: italic;
+}
+
+/* Personnel Section */
+.personnel-section {
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(200, 200, 200, 0.1);
+}
+
+.personnel-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.header-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(196, 30, 58, 0.3), transparent);
+}
+
+.personnel-title {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: rgba(232, 224, 208, 0.6);
+    text-transform: uppercase;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.personnel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.detective-card {
+    position: relative;
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.8) 0%, rgba(17, 17, 17, 0.6) 100%);
+    border: 1px solid rgba(200, 200, 200, 0.15);
+    padding: 2rem 1.5rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.detective-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, rgba(196, 30, 58, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.detective-card:hover {
+    border-color: rgba(196, 30, 58, 0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+.detective-card:hover::before {
+    opacity: 1;
+}
+
+.card-stamp {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: rgba(196, 30, 58, 0.8);
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    font-weight: 700;
+}
+
+.detective-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #e8e0d0;
+    margin-bottom: 1.25rem;
+    letter-spacing: 0.05em;
+}
+
+.detective-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.contact-label {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: rgba(232, 224, 208, 0.5);
+    text-transform: uppercase;
+}
+
+.contact-number {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.95rem;
+    color: rgba(232, 224, 208, 0.9);
+    text-decoration: none;
+    transition: color 0.3s;
+    letter-spacing: 0.05em;
+}
+
+.contact-number:hover {
+    color: #c41e3a;
+}
+
+.card-corner {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border: 1px solid rgba(200, 200, 200, 0.2);
+}
+
+.card-corner.top-left {
+    top: 8px;
+    left: 8px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.card-corner.bottom-right {
+    bottom: 8px;
+    right: 8px;
+    border-left: none;
+    border-top: none;
+}
+
+/* Official Records Section */
+.official-records {
+    margin-top: 3rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(200, 200, 200, 0.1);
+}
+
+.records-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.records-title {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: rgba(232, 224, 208, 0.6);
+    text-transform: uppercase;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.records-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.record-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.25rem;
+    background: rgba(10, 10, 10, 0.4);
+    border: 1px solid rgba(200, 200, 200, 0.1);
+    transition: all 0.3s;
+}
+
+.record-item:hover {
+    border-color: rgba(196, 30, 58, 0.3);
+    background: rgba(18, 18, 18, 0.6);
+}
+
+.record-icon {
+    color: rgba(196, 30, 58, 0.7);
+    flex-shrink: 0;
+    margin-top: 0.25rem;
+}
+
+.record-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.record-label {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: rgba(232, 224, 208, 0.5);
+    text-transform: uppercase;
+}
+
+.record-value {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    color: rgba(232, 224, 208, 0.9);
+    line-height: 1.5;
+}
+
+.record-link {
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.record-link:hover {
+    color: #c41e3a;
+}
+
+/* Quote Section */
+.quote-section {
+    text-align: center;
+    margin-top: 4rem;
+    padding: 2rem;
+}
+
+.quote-section p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-style: italic;
+    color: rgba(232, 224, 208, 0.5);
+    margin: 0;
+    letter-spacing: 0.02em;
+    line-height: 1.6;
+}
+
+/* Footer */
+.noir-footer {
+    text-align: center;
+    margin-top: 3rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    color: rgba(232, 224, 208, 0.3);
+    letter-spacing: 0.05em;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+
+    .noir-grain,
+    .smoke,
+    .red-ambient-pulse,
+    .shadow-presence {
+        animation: none !important;
+    }
+
+    .noir-spotlight.flicker {
+        opacity: 1;
+    }
+}
+
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Tablet (768px - 1023px) */
+@media (max-width: 1023px) {
+    .content-grid {
+        grid-template-columns: 180px 1fr;
+        gap: 1.5rem;
+    }
+
+    .status-panel {
+        padding: 1.25rem 0.875rem;
+    }
+
+    .noir-content-wrapper {
+        max-width: 800px;
+    }
+
+    .noir-title {
+        font-size: clamp(3.5rem, 10vw, 5rem);
+    }
+
+    .dossier-form {
+        padding: 2rem 1.5rem;
+    }
+}
+
+/* Mobile (max-width: 767px) */
+@media (max-width: 767px) {
+    .noir-contact-container {
+        padding: 3rem 1rem 2rem;
+    }
+
+    /* Grid to stack */
+    .content-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .status-panel {
+        position: relative;
+        top: 0;
+        order: -1;
+        padding: 1.25rem 1rem;
+    }
+
+    .status-header {
+        font-size: 0.65rem;
+    }
+
+    .status-label {
+        font-size: 0.55rem;
+    }
+
+    .status-value {
+        font-size: 0.7rem;
+    }
+
+    .status-footer {
+        font-size: 0.5rem;
+    }
+
+    /* Hero */
+    .noir-hero {
+        margin-bottom: 2.5rem;
+    }
+
+    .evidence-tag {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.875rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .noir-title {
+        font-size: clamp(2.5rem, 12vw, 4rem);
+        letter-spacing: 0.1em;
+    }
+
+    .noir-subtitle {
+        font-size: 0.875rem;
+    }
+
+    .case-number {
+        font-size: 0.65rem;
+    }
+
+    /* Story panel */
+    .story-panel {
+        padding: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .story-panel p {
+        font-size: 0.875rem;
+    }
+
+    /* Dossier */
+    .dossier-header {
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: flex-start;
+        padding: 1.25rem 1rem;
+    }
+
+    .dossier-label {
+        font-size: 0.7rem;
+    }
+
+    .dossier-stamp {
+        font-size: 0.65rem;
+        padding: 0.2rem 0.625rem;
+    }
+
+    .dossier-form {
+        padding: 1.5rem 1rem;
+    }
+
+    /* Form fields - touch-friendly */
+    .form-field {
+        margin-bottom: 1.5rem;
+    }
+
+    .field-label {
+        margin-bottom: 0.625rem;
+    }
+
+    .label-text {
+        font-size: 0.65rem;
+    }
+
+    .dossier-input {
+        font-size: 0.875rem;
+        padding: 0.875rem 0.875rem;
+        min-height: 48px;
+        -webkit-tap-highlight-color: rgba(196, 30, 58, 0.1);
+    }
+
+    .dossier-textarea {
+        min-height: 120px;
+        font-size: 0.875rem;
+    }
+
+    /* Submit button - touch-friendly */
+    .evidence-stamp-button {
+        font-size: 0.75rem;
+        padding: 1rem 1.5rem;
+        min-height: 52px;
+        letter-spacing: 0.15em;
+    }
+
+    .warning-notice {
+        font-size: 0.65rem;
+        margin-top: 1.25rem;
+    }
+
+    /* Character counter */
+    .character-counter {
+        font-size: 0.6rem;
+    }
+
+    /* Evidence upload */
+    .evidence-label {
+        padding: 0.875rem 1rem;
+        min-height: 48px;
+    }
+
+    .evidence-label-text {
+        font-size: 0.75rem;
+    }
+
+    .evidence-hint {
+        font-size: 0.65rem;
+    }
+
+    /* Records grid */
+    .records-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    /* Success modal */
+    .stamp-received {
+        font-size: 2.5rem;
+        padding: 1.5rem 2rem;
+        border-width: 6px;
+    }
+
+    .success-message {
+        font-size: 1.125rem;
+    }
+
+    .success-details {
+        font-size: 0.8rem;
+    }
+
+    /* Watching message */
+    .watching-message {
+        font-size: 1.25rem;
+        bottom: 8%;
+        padding: 0 20px;
+        text-align: center;
+    }
+
+    /* Reduce visual effects */
+    .noir-grain {
+        opacity: 0.2;
+    }
+
+    .smoke {
+        opacity: 0.5;
+    }
+}
+
+/* Small Mobile (max-width: 480px) */
+@media (max-width: 480px) {
+    .noir-contact-container {
+        padding: 2.5rem 0.75rem 1.5rem;
+    }
+
+    .noir-title {
+        font-size: 2.5rem;
+        letter-spacing: 0.08em;
+    }
+
+    .noir-subtitle {
+        font-size: 0.8rem;
+    }
+
+    .story-panel {
+        padding: 0.875rem;
+    }
+
+    .story-panel p {
+        font-size: 0.8rem;
+    }
+
+    .dossier-header {
+        padding: 1rem 0.875rem;
+    }
+
+    .dossier-form {
+        padding: 1.25rem 0.875rem;
+    }
+
+    .dossier-input {
+        font-size: 0.8125rem;
+        padding: 0.75rem;
+        min-height: 46px;
+    }
+
+    .dossier-textarea {
+        min-height: 100px;
+        font-size: 0.8125rem;
+    }
+
+    .evidence-stamp-button {
+        font-size: 0.7rem;
+        padding: 0.875rem 1.25rem;
+        min-height: 48px;
+    }
+
+    .warning-notice {
+        font-size: 0.6rem;
+    }
+
+    .status-panel {
+        padding: 1rem 0.875rem;
+    }
+
+    .stamp-received {
+        font-size: 2rem;
+        padding: 1.25rem 1.5rem;
+        border-width: 5px;
+    }
+
+    .success-message {
+        font-size: 1rem;
+    }
+
+    .watching-message {
+        font-size: 1.125rem;
+    }
+}
+
+/* Landscape Mobile */
+@media (max-width: 767px) and (orientation: landscape) {
+    .noir-contact-container {
+        padding: 2rem 2rem 1.5rem;
+    }
+
+    .noir-hero {
+        margin-bottom: 2rem;
+    }
+
+    .noir-title {
+        font-size: 3rem;
+    }
+
+    .dossier-form {
+        padding: 1.5rem 1.5rem;
+    }
+
+    .dossier-textarea {
+        min-height: 80px;
+    }
+}

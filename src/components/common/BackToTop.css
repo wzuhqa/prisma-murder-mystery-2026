@@ -1,0 +1,146 @@
+/* ============================================
+   BACK TO TOP BUTTON
+   Forensic-style return to case file button
+   ============================================ */
+
+.back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 998;
+    background: rgba(10, 10, 10, 0.95);
+    border: 1px solid rgba(139, 0, 0, 0.4);
+    border-radius: 4px;
+    padding: 0.75rem 1.25rem;
+    cursor: pointer;
+    font-family: 'IBM Plex Mono', 'Courier New', monospace;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: fade-in-up 0.4s ease-out;
+}
+
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.back-to-top__inner {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    position: relative;
+    z-index: 2;
+}
+
+.back-to-top__icon {
+    font-size: 1rem;
+    color: #c8a96e;
+    transition: transform 0.3s ease;
+}
+
+.back-to-top--hovered .back-to-top__icon {
+    transform: translateY(-2px);
+}
+
+.back-to-top__text {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: rgba(200, 169, 110, 0.8);
+    white-space: nowrap;
+    transition: color 0.3s ease;
+}
+
+.back-to-top--hovered .back-to-top__text {
+    color: #c8a96e;
+}
+
+/* Glow effect */
+.back-to-top__glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(139, 0, 0, 0.2) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.back-to-top--hovered .back-to-top__glow {
+    opacity: 1;
+}
+
+/* Scanline effect */
+.back-to-top__scanline {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(200, 169, 110, 0.5), transparent);
+    animation: scanline-move 2s linear infinite;
+}
+
+@keyframes scanline-move {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(50px);
+    }
+}
+
+/* Hover state */
+.back-to-top:hover {
+    border-color: rgba(139, 0, 0, 0.8);
+    box-shadow: 0 0 20px rgba(139, 0, 0, 0.3), 0 4px 15px rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Focus state for accessibility */
+.back-to-top:focus-visible {
+    outline: 2px solid #c8a96e;
+    outline-offset: 4px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .back-to-top {
+        bottom: 1.5rem;
+        right: 1rem;
+        padding: 0.6rem 1rem;
+    }
+
+    .back-to-top__text {
+        font-size: 0.55rem;
+    }
+
+    .back-to-top__icon {
+        font-size: 0.85rem;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .back-to-top {
+        animation: none;
+    }
+
+    .back-to-top__scanline {
+        animation: none;
+        display: none;
+    }
+
+    .back-to-top,
+    .back-to-top__icon,
+    .back-to-top__text,
+    .back-to-top__glow {
+        transition: none;
+    }
+}
