@@ -66,15 +66,6 @@ const Home = () => {
         <CaseSummaryPanel />
       </Suspense>
 
-      <SectionDivider label="TIME SENSITIVE" />
-
-      {/* ===== ENHANCED COUNTDOWN SECTION ===== */}
-      <section className="relative z-20 bg-base">
-        <Suspense fallback={<SectionLoader />}>
-          <EnhancedCountdown targetTime="2026-02-28T00:00:00" />
-        </Suspense>
-      </section>
-
       <SectionDivider label="SUSPECT LINEUP" />
 
       {/* ===== ARTIST LINEUP SECTION ===== */}

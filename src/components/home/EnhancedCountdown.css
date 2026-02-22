@@ -15,12 +15,12 @@
   contain: layout style paint;
 }
 
-/* Vignette overlay */
+/* Vignette overlay - Cinematic Dark: softer edges */
 .enhanced-countdown-wrapper::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center, transparent 20%, rgba(0, 0, 0, 0.9) 100%);
+  background: radial-gradient(ellipse at center, transparent 30%, rgba(0, 0, 0, 0.5) 100%);
   pointer-events: none;
   z-index: 5;
 }

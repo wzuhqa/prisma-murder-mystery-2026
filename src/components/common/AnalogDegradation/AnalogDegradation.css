@@ -181,7 +181,8 @@
 .vcr-rec,
 .vcr-play {
     position: absolute;
-    top: 30px;
+    top: 110px;
+    /* Shifted down to prevent overlap with 90px navbar */
     left: 40px;
     display: flex;
     align-items: center;
@@ -190,7 +191,7 @@
 }
 
 .vcr-play {
-    top: 30px;
+    top: 110px;
     left: auto;
     right: 40px;
     opacity: 0.7;

@@ -383,7 +383,7 @@ const SponsorsMarquee = () => {
       </div>
 
       {/* Tiered Marquee Rows */}
-      <div className="relative z-10 space-y-10 md:space-y-14">
+      <div className="relative z-10 space-y-10 md:space-y-14 max-w-7xl mx-auto">
         <MarqueeRow tier={SPONSOR_TIERS.gold} tierKey="gold" />
         <MarqueeRow tier={SPONSOR_TIERS.silver} tierKey="silver" reverse />
         <MarqueeRow tier={SPONSOR_TIERS.bronze} tierKey="bronze" />

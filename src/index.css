@@ -33,14 +33,17 @@
 /* ===== CUSTOM THEME ===== */
 /* Noir Aesthetic Refinement Tokens (V2.5) */
 :root {
-  --bg-base: #060608;
-  --bg-panel: #1A1A1E;
-  /* Darkened Charcoal Paper */
-  --bg-elevated: #222228;
+  --bg-base: #0a0a0d;
+  /* Slightly lighter for cinematic dark */
+  --bg-panel: #1e1e24;
+  /* Darkened Charcoal Paper - slightly lighter */
+  --bg-elevated: #262630;
 
-  --text-header: #E5E5E5;
-  --text-body: #B3B3B8;
-  --text-meta: #6C6C72;
+  --text-header: #E8E8E8;
+  /* Brighter for better contrast */
+  --text-body: #C0C0C5;
+  /* Brighter for readability */
+  --text-meta: #808088;
   --color-blood-accent: #7A0E12;
   /* Dried Blood */
 
@@ -198,7 +201,8 @@ body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.05);
+  /* Reduced from 0.2 */
   z-index: 9990;
   pointer-events: none;
   transition: opacity 0.4s ease;
@@ -209,9 +213,9 @@ body::after {
   content: '';
   position: fixed;
   inset: 0;
-  /* Noir Color Grading Layer (Red-Brown Tint) & Static Grain - Reduced intensity */
+  /* Noir Color Grading Layer (Red-Brown Tint) & Static Grain - Reduced intensity for clarity */
   background:
-    radial-gradient(circle at center, rgba(20, 10, 10, 0.05) 0%, rgba(0, 0, 0, 0.2) 100%),
+    radial-gradient(circle at center, rgba(20, 10, 10, 0.02) 0%, rgba(0, 0, 0, 0.12) 100%),
     url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 9999;
@@ -220,7 +224,8 @@ body::after {
 }
 
 .psychological-spotlight::after {
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.15);
+  /* Reduced from 0.35 */
 }
 
 ::selection {
@@ -1807,6 +1812,7 @@ body::after {
 .marquee-content {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   animation-name: marquee;
   animation-duration: 30s;
   animation-timing-function: linear;
@@ -2914,6 +2920,60 @@ html.lenis body {
   overflow: hidden;
 }
 
+/* ===== RAIN ANIMATION (Performance Optimized) ===== */
+.rain-container {
+  overflow: hidden;
+  z-index: 10;
+}
+
+.rain-layer {
+  position: absolute;
+  inset: -100px;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cline x1='50' y1='0' x2='50' y2='100' stroke='white' stroke-width='0.5' opacity='0.3'/%3E%3C/svg%3E");
+  background-size: 100px 300px;
+  animation: rain-fall linear infinite;
+}
+
+.rain-layer-1 {
+  opacity: calc(0.3 * var(--rain-intensity, 1));
+  animation-duration: 0.6s;
+}
+
+.rain-layer-2 {
+  opacity: calc(0.2 * var(--rain-intensity, 1));
+  animation-duration: 0.8s;
+  animation-delay: -0.2s;
+  transform: rotate(2deg);
+}
+
+.rain-layer-3 {
+  opacity: calc(0.15 * var(--rain-intensity, 1));
+  animation-duration: 1.1s;
+  animation-delay: -0.5s;
+  transform: rotate(-1deg);
+}
+
+@keyframes rain-fall {
+  from {
+    background-position: 0 -300px;
+  }
+
+  to {
+    background-position: 10px 600px;
+  }
+}
+
 .lenis.lenis-scrolling iframe {
   pointer-events: none;
+}
+
+/* ===== FORENSIC SCANNER RETICLE ANIMATION ===== */
+@keyframes reticle-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
