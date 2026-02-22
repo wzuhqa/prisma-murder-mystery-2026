@@ -111,6 +111,45 @@ const SuspectTicker = () => {
 }
 
 // ============================================
+// DAYS REMAINING URGENCY BADGE
+// ============================================
+const DaysLeftBadge = memo(() => {
+  const ref = useRef(null)
+  const EVENT_DATE = new Date('2026-02-28T00:00:00')
+
+  useEffect(() => {
+    const update = () => {
+      if (!ref.current) return
+      const now = new Date()
+      const diffMs = EVENT_DATE - now
+      if (diffMs <= 0) {
+        ref.current.innerHTML = '<span class="days-badge-live">EVENT LIVE</span>'
+        return
+      }
+      const days = Math.floor(diffMs / (1000 * 60 * 60 * 24))
+      const hours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+      ref.current.innerHTML =
+        `<span class="days-badge-number">${days}</span>` +
+        `<span class="days-badge-unit">D</span>` +
+        `<span class="days-badge-sep">:</span>` +
+        `<span class="days-badge-number">${String(hours).padStart(2, '0')}</span>` +
+        `<span class="days-badge-unit">H</span>`
+    }
+    update()
+    const timer = setInterval(update, 60_000) // update every minute
+    return () => clearInterval(timer)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  return (
+    <div className="days-left-badge" title="Time until PRISMA 2026">
+      <span className="days-badge-label">BREACH IN</span>
+      <span ref={ref} className="days-badge-value" />
+    </div>
+  )
+})
+
+// ============================================
 // EVIDENCE TAG (yellow crime scene marker)
 // ============================================
 const EvidenceTag = memo(({ index }) => (
@@ -440,6 +479,7 @@ const SlashNavbar = ({ ambientGlow = true, isLocked = false }) => {
               <span className="status-text--gold">MONITORING ACTIVE</span>
               <LiveClock />
             </div>
+            <DaysLeftBadge />
             <SuspectTicker />
           </div>
         </div>

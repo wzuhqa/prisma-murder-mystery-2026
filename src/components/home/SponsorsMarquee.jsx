@@ -112,7 +112,7 @@ const SponsorCard = ({ sponsor, tier, tierKey, index }) => {
   return (
     <TiltCard index={index}>
       <div
-        className={`relative group cursor-pointer ${isGold ? 'mx-10 md:mx-14' : isSilver ? 'mx-7 md:mx-10' : 'mx-5 md:mx-8'} ${rotation} transition-all duration-500 hover:rotate-0 hover:scale-105 hover:z-30`}
+        className={`relative group cursor-pointer ${isGold ? 'mx-4 md:mx-10 lg:mx-14' : isSilver ? 'mx-3 md:mx-7 lg:mx-10' : 'mx-2 md:mx-5 lg:mx-8'} ${rotation} transition-all duration-500 hover:rotate-0 hover:scale-105 hover:z-30`}
       >
         <div
           className={`relative rounded-sm border-l-4 ${tier.borderColor} border border-white/5 ${tier.cardBg} shadow-[12px_12px_30px_rgba(0,0,0,0.7)] transition-all duration-500 overflow-hidden
@@ -139,7 +139,7 @@ const SponsorCard = ({ sponsor, tier, tierKey, index }) => {
 
           {/* CLASSIFIED Stamp on hover */}
           <div className={`absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:rotate-12 ${isGold ? 'text-amber-500/70' : isSilver ? 'text-gray-400/60' : 'text-amber-700/50'}`}>
-            <div className={`border-2 ${isGold ? 'border-amber-500/70' : isSilver ? 'border-gray-500/60' : 'border-amber-700/50'} px-2 py-0.5 rotate-45 text-[8px] font-bold tracking-widest uppercase font-mono`}>
+            <div className={`border-2 ${isGold ? 'border-amber-500/70' : isSilver ? 'border-gray-500/60' : 'border-amber-700/50'} px-2 py-0.5 rotate-45 text-[8px] font-light tracking-widest uppercase font-sans`}>
               {isGold ? 'CONFIDENTIAL' : isSilver ? 'CLASSIFIED' : 'VERIFIED'}
             </div>
           </div>
@@ -153,12 +153,12 @@ const SponsorCard = ({ sponsor, tier, tierKey, index }) => {
 
           <div className="flex flex-col items-center gap-2 relative z-10">
             {/* Tier Tag */}
-            <span className={`font-mono tracking-[0.3em] uppercase ${tier.tagBg} ${tier.tagBorder} border px-2 py-0.5 rounded-sm ${isGold ? 'text-[9px] text-amber-400/80' : isSilver ? 'text-[8px] text-gray-400/70' : 'text-[7px] text-amber-700/60'}`}>
+            <span className={`font-sans font-light tracking-[0.3em] uppercase ${tier.tagBg} ${tier.tagBorder} border px-2 py-0.5 rounded-sm ${isGold ? 'text-[9px] text-amber-400/80' : isSilver ? 'text-[8px] text-gray-400/70' : 'text-[7px] text-amber-700/60'}`}>
               {tier.tag}
             </span>
 
             {/* Sponsor Name */}
-            <span className={`font-heading whitespace-nowrap tracking-wide drop-shadow-lg group-hover:text-white transition-colors duration-400 ${tier.textColor} ${isGold ? 'text-3xl md:text-4xl' : isSilver ? 'text-xl md:text-2xl' : 'text-base md:text-lg'}`}>
+            <span className={`whitespace-nowrap tracking-wide drop-shadow-lg group-hover:text-white transition-colors duration-400 ${tier.textColor} ${isGold ? 'text-4xl md:text-5xl' : isSilver ? 'text-2xl md:text-3xl' : 'text-xl md:text-2xl'}`} style={{ fontFamily: 'var(--font-creepy)', fontWeight: 400 }}>
               {sponsor}
             </span>
 
@@ -196,7 +196,7 @@ const MarqueeRow = ({ tier, tierKey, reverse = false }) => {
       >
         <div className={`h-[1px] flex-1 bg-gradient-to-r from-transparent ${isGold ? 'via-amber-500/30' : isSilver ? 'via-gray-500/20' : 'via-amber-800/15'} to-transparent`} />
         <motion.span
-          className={`font-mono text-[10px] tracking-[0.4em] uppercase ${isGold ? 'text-amber-400/70' : isSilver ? 'text-gray-400/60' : 'text-amber-700/50'}`}
+          className={`font-sans font-light text-[10px] tracking-[0.4em] uppercase ${isGold ? 'text-amber-400/70' : isSilver ? 'text-gray-400/60' : 'text-amber-700/50'}`}
           initial={{ opacity: 0, x: -20 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -383,7 +383,7 @@ const SponsorsMarquee = () => {
       </div>
 
       {/* Tiered Marquee Rows */}
-      <div className="relative z-10 space-y-4">
+      <div className="relative z-10 space-y-10 md:space-y-14">
         <MarqueeRow tier={SPONSOR_TIERS.gold} tierKey="gold" />
         <MarqueeRow tier={SPONSOR_TIERS.silver} tierKey="silver" reverse />
         <MarqueeRow tier={SPONSOR_TIERS.bronze} tierKey="bronze" />
